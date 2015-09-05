@@ -1,0 +1,23 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+<span></span><span></span>
+<script>
+	var record = false;
+	var out = "";
+	$(window).click(function(e){
+		record = ! record;
+		console.log(out)
+	})
+    $(window).mousemove(function(e){
+   	  if (! record)
+   	  	return;
+      var pageCoords = "( " + e.pageX + ", " + e.pageY + " )";
+      out = out + (e.clientX + " " + e.clientY) + "\n";
+    });
+
+</script>
+</body>
+</html>
