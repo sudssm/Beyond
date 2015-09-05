@@ -1,14 +1,14 @@
 import cv2
 import numpy as np
 
-# cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 gesture = []
 while(1):
 
     # Take each frame
-    # _, frame = cap.read()
-    frame = cv2.imread('led.jpg')
+    _, frame = cap.read()
+    # frame = cv2.imread('led.jpg')
     frame = cv2.flip(frame,1)
 
     # Convert BGR to HSV
@@ -35,7 +35,7 @@ while(1):
     mask_white = cv2.inRange(hsv, lw, uw)
 # 
 
-    mask = cv2.bitwise_or(mask, mask_white)
+    # mask = cv2.bitwise_or(mask, mask_white)
     # Bitwise-AND mask and original image
     res = cv2.bitwise_and(frame,frame, mask= mask)
 
