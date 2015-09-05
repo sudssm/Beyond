@@ -15,15 +15,15 @@ gestureMap = {
 
 
 def importPoints (filename):
-  ham = 20
+  print "importing", filename
+  ham = 5
   points = []
   with open(filename,'r') as f:
     for l in f.readlines():
       [x,y]= [int(p) for p in l.rstrip().split(" ")]
 
-      if len(points) == 0 or abs(points[-1][0] - x) > ham or abs(points[-1][1] - y) > ham:
+      if len(points) == 0 or (abs(points[-1][0] - x) + abs(points[-1][1] - y)) > ham:
         points.append((x,y))
-
   return points
 
 def lookup (points):
@@ -32,17 +32,13 @@ def lookup (points):
     gestureMap.keys(),
     tolerance=10)
 
-  print strokes
+  #print strokes
 
   for gesture in gestures:
-    if gesture in gestureMap:
-      return gestureMap[gesture]
-    else:
-      print "NOT FOUND:",gesture
+    return gestureMap[gesture]
 
 print lookup (importPoints("in/star.in"))
 
-'''
 print lookup (importPoints("in/square.in"))
 print ""
 print lookup (importPoints("in/square2.in"))
@@ -56,15 +52,7 @@ print ""
 
 print lookup(importPoints("in/superman.in"))
 print lookup(importPoints("in/superman2.in"))
-'''
-#print("cross:", g.get_score(cross))
-#print("check:", g.get_score(check))
-#print("circle:", g.get_score(circle))
-#print("square:", g.get_score(square))
 
-# use database to find the more alike gesture, if any
-
-
-
-#print lookup("in/square2.in")
+print lookup(importPoints("in/right.in"))
+print lookup(importPoints("in/down.in"))
 
