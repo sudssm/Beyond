@@ -18,7 +18,7 @@ gestureMap = {
 }
 
 
-moosegesture._MIN_STROKE_LEN = 60
+moosegesture._MIN_STROKE_LEN = 80
 
 def importPoints (filename):
   print "importing", filename
@@ -36,7 +36,7 @@ def lookup (points):
   possibles = gestureMap.keys()
   gestures = moosegesture.findClosestMatchingGesture(strokes, 
     gestureMap.keys(),
-    tolerance=5)
+    tolerance=3)
 
   print strokes
 
