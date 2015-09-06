@@ -9,8 +9,25 @@ import actuator
 import threading
 import pyautogui
 
+import socket
+
 SCREEN_WIDTH = 1300
 SCREEN_HEIGHT = 800
+
+host = "45.79.152.183"
+port = 5000
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.settimeout(2)
+
+try :
+    s.connect((host, port))
+except :
+    print 'Unable to connect to socket'
+    sys.exit()
+ 
+def log(message):
+    s.send(message)
+    print message
 
 # Mode can be None or MOUSE
 def gestureRecognize():
@@ -25,13 +42,13 @@ def gestureRecognize():
             # flush the gesture
             g = gesture.lookup(gesture_cache)
             if MODE != "MOUSE":
-                print g 
+                log(g)
             if g != None:
                 if g == "long_hold":
                     MODE = "MOUSE" if MODE == None else None
-                    print "Mouse Mode: " + str(MODE)
+                    log("Mouse Mode: " + str(MODE))
                 if g == "short_hold" and MODE == "MOUSE":
-                    print "click"
+                    log("click")
                     pyautogui.click()
                 if MODE != "MOUSE":
                     thread = threading.Thread(target=actuator.on_gesture_made, args=(g,))
@@ -84,7 +101,7 @@ def gestureRecognize():
         moments = cv2.moments(maxcontour[1])
         centre = (int(moments['m10']/moments['m00']), int(moments['m01']/moments['m00']))
         cv2.circle(mask, centre, 3, (0, 255, 0), -1)
-        print centre
+        log(centre)
         gesture_cache.append(centre)
         lag = 0
 
