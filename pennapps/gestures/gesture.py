@@ -18,7 +18,7 @@ gestureMap = {
 }
 
 
-moosegesture._MIN_STROKE_LEN = 80
+moosegesture._MIN_STROKE_LEN = 60
 
 def importPoints (filename):
   print "importing", filename
@@ -43,7 +43,9 @@ def lookup (points):
   if gestures == None:
     return None
   for gesture in gestures:
-    return gestureMap[gesture]
+    print "potential", gestureMap[gesture]
+  
+  return gestureMap[gesture]
 '''
 print lookup (importPoints("in/star.in"))
 
