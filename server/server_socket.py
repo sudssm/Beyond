@@ -1,7 +1,15 @@
 # Tcp Chat server
  
 import socket, select
- 
+
+MAGIC = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'
+HSHAKE_RESP = "HTTP/1.1 101 Switching Protocols\r\n" + \
+            "Upgrade: websocket\r\n" + \
+            "Connection: Upgrade\r\n" + \
+            "Sec-WebSocket-Accept: %s\r\n" + \
+            "\r\n"
+
+
 #Function to broadcast chat messages to all connected clients
 def broadcast_data (sock, message):
     #Do not send the message to master socket and the client who has send us the message
@@ -55,6 +63,19 @@ if __name__ == "__main__":
                         print data
                         broadcast_data(sock, data)                
                  
+
+                    #might be html
+                    headers = {}
+                    lines = data.splitlines()
+                    for l in lines:
+                        parts = l.split(": ", 1)
+                        if len(parts) == 2:
+                            headers[parts[0]] = parts[1]
+                    headers['code'] = lines[len(lines) - 1]
+                    key = headers['Sec-WebSocket-Key']
+                    resp_data = HSHAKE_RESP % ((base64.b64encode(hashlib.sha1(key+MAGIC).digest()),))
+                    sock.send(resp_data)
+
                 except:
                     sock.close()
                     CONNECTION_LIST.remove(sock)
