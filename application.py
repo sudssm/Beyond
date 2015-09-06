@@ -57,30 +57,27 @@ def gestureRecognize():
             if MODE != "MOUSE":
                 log(g)
             if g != None:
-                if g == "long_hold":
-                    MODE = "MOUSE" if MODE == None else None
-                    log("Mouse Mode: " + str(MODE))
-                if g == "short_hold" and MODE == "MOUSE":
-                    log("click")
-                    pyautogui.click()
+                # if g == "long_hold":
+                #     MODE = "MOUSE" if MODE == None else None
+                #     log("Mouse Mode: " + str(MODE))
+                # if g == "short_hold" and MODE == "MOUSE":
+                #     log("click")
+                #     pyautogui.click()
                 if MODE != "MOUSE":
                     thread = threading.Thread(target=actuator.on_gesture_made, args=(g,))
                     thread.daemon = True                            # Daemonize thread
                     thread.start()                                  # Start the execution
 
             gesture_cache = []
-
-
         # Take each frame
         _, frame = cap.read()
         # frame = cv2.imread('led.jpg')
         frame = cv2.flip(frame,1)
-
         # Convert BGR to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        # pink = np.uint8([[[186, 109, 199]]])
+        pink = np.uint8([[[221, 136, 200 ]]])
 
-
-        pink = np.uint8([[[186, 109, 199]]])
         # define range of pink color in HSV
         hsv_pink = cv2.cvtColor(pink, cv2.COLOR_BGR2HSV)[0][0]
 
@@ -103,9 +100,9 @@ def gestureRecognize():
             area = cv2.contourArea(contour) 
             if area > maxcontour[0]:
                 maxcontour = (area, contour)
-        # cv2.imshow('frame',frame)
+        cv2.imshow('frame',frame)
         # cv2.imshow('mask',mask)
-        # cv2.imshow('res', res)
+        cv2.imshow('res', res)
 
 
         if maxcontour[1] == None or maxcontour[0] < 30:

@@ -58,18 +58,18 @@ def handle_screen(action):
         Popen(["brightness", str(b)])
 
 def handle_url_action(action):
+    print action
     if action == "urlstore":
-        pyautogui.hotkey("f6")
-        pyautogui.hotkey("cmd", "C")
+        pyautogui.hotkey("command", "l")
+        pyautogui.hotkey("command", "c")
         url = check_output(["osascript", "-e", "the clipboard"])
         print url
         setUrl(url)
     elif action == "urlfetch":
         url = getUrl()
-        check_output(["osascript", "-e", 'set the clipboard to "%i"' % url])
-        pyautogui.hotkey("f6")
-        pyautogui.hotkey("cmd", "C")
-        pyautogui.hotkey("enter")        
+        # check_output(["osascript", "-e", 'set the clipboard to "%i"' % url])
+        if url != None and len(url) != 0:
+            check_output(["open", url])  
 
 def set_volume(volume):
     a = check_output(["osascript", "-e", "set volume output volume %i" % volume])
