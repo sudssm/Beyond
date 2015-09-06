@@ -9,7 +9,7 @@ import actuator
 import threading
 import pyautogui
 
-import socket
+import socket, sys
 
 SCREEN_WIDTH = 1300
 SCREEN_HEIGHT = 800
@@ -21,12 +21,14 @@ s.settimeout(2)
 
 try :
     s.connect((host, port))
+
+    s.setblocking(0)
 except :
     print 'Unable to connect to socket'
     sys.exit()
  
 def log(message):
-    s.send(message)
+    s.send(str(message))
     print message
 
 def getUrl():
@@ -44,6 +46,9 @@ def gestureRecognize():
 
     gesture_cache = []
     lag = 0
+
+    print "ready"
+
     while(1):
         lag += 1
         if lag > 10 and len(gesture_cache) > 0:
@@ -80,7 +85,7 @@ def gestureRecognize():
         hsv_pink = cv2.cvtColor(pink, cv2.COLOR_BGR2HSV)[0][0]
 
         lower = np.array([hsv_pink[0]-20, 100, 100])
-        upper = np.array([hsv_pink[0] + 5, 255, 255])
+        upper = np.array([hsv_pink[0] + 20, 255, 255])
         
         #define range of white when looking inside? (not currently used)
         lw = np.array([0,0,0], dtype=np.uint8)

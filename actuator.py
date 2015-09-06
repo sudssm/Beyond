@@ -4,6 +4,7 @@ from subprocess import Popen, PIPE, check_output
 import re
 import pyautogui
 from test import HIDPostAuxKey
+from application import setUrl, getUrl
 
 
 # hidsystem/ev_keymap.h
@@ -56,12 +57,28 @@ def handle_screen(action):
     if action == "screen_toggle":
         Popen(["brightness", str(b)])
 
+def handle_url_action(action):
+    if action == "urlstore":
+        pyautogui.hotkey("f6")
+        pyautogui.hotkey("cmd", "C")
+        url = check_output(["osascript", "-e", "the clipboard"])
+        print url
+        setUrl(url)
+    elif action == "urlfetch":
+        url = getUrl()
+        check_output(["osascript", "-e", 'set the clipboard to "%i"' % url])
+        pyautogui.hotkey("f6")
+        pyautogui.hotkey("cmd", "C")
+        pyautogui.hotkey("enter")        
+
 def set_volume(volume):
     a = check_output(["osascript", "-e", "set volume output volume %i" % volume])
 
 
 def do_action(action):
     print action 
+    if "url" in action:
+        handle_url_action(action)
     if "media" in action or "volume" in action: 
         handle_media_keys(action)
     if "screen" in action:
