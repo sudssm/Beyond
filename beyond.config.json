@@ -10,7 +10,9 @@
         "left": "media_prevtrack", 
         "updown": "media_playpause",
         "triangle": "volumemute",
-        "square": "screen_toggle"
+        "square": "screen_toggle",
+        "long_hold": "mode_toggle",
+        "short_hold": "click"
     },
     "Google Chrome": {
         "down": "up",
