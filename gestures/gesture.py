@@ -9,13 +9,32 @@ gestureMap = {
   ('UL',): "upleft",
   ('DR',): "downright",
   ('DL',): "downleft",
-  #('U', 'DL', 'UR', 'DR',): "up_arrow",
-  ('R', 'D', 'L', 'U',): "sq_cw_tl",
-  ('D', 'R', 'U', 'L',): "sq_ccw_tl",
   ('DR', 'L', 'UR',): "tr_cw_top",
   ('UR', 'DR', 'L',): "tr_cw_bl",
   ('L', 'UR','DR',): "tr_cw_br",
 }
+
+def add_rotations(pattern, name, reverse=False):
+  shift = pattern
+  while 1:
+    shift = shift[1:] + shift[0:1]
+    gestureMap[shift] = name
+
+    if shift == pattern:
+      if reverse:
+        add_rotations(pattern, name)
+      return
+
+
+add_rotations(('R', 'D', 'L', 'U',), "square", True)
+
+add_rotations(('UR', 'DR', 'L',), "triangle", True)
+add_rotations(('U', 'DR', 'L',), "triangle", True)
+add_rotations(('UR', 'D', 'L',), "triangle", True)
+
+add_rotations(('UL', 'R', 'D',), "triangle", True)
+add_rotations(('UL', 'UR', 'D',), "triangle", True)
+add_rotations(('UL', 'U', 'DR',), "triangle", True)
 
 
 moosegesture._MIN_STROKE_LEN = 80
