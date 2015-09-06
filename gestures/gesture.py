@@ -72,23 +72,3 @@ def lookup (points):
       return shape
 
   return gestures[0]
-'''
-print lookup (importPoints("in/star.in"))
-
-print lookup (importPoints("in/square.in"))
-print ""
-print lookup (importPoints("in/square2.in"))
-print ""
-print lookup (importPoints("in/square3.in"))
-print ""
-print lookup (importPoints("in/square4.in"))
-print ""
-print lookup (importPoints("in/triangle.in"))
-print ""
-
-print lookup(importPoints("in/superman.in"))
-print lookup(importPoints("in/superman2.in"))
-
-print lookup(importPoints("in/right.in"))
-print lookup(importPoints("in/down.in"))
-'''
