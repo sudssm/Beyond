@@ -1,5 +1,4 @@
 import moosegesture
-
 gestureMap = {
   ('U',): "up",
   ('L',): "left",
@@ -41,11 +40,13 @@ moosegesture._MIN_STROKE_LEN = 80
 def identify_hold(points):
   if len(points) < 3: 
     return False 
-  for i in range(len(points) -1):
-    d = moosegesture._distance(points[i], points[i+1])
-    if d > 30:
-      return False       
-  return True 
+
+  diff = [moosegesture._distance(x, points[i-1]) for i,x in enumerate(points)]
+  mean_diff = float(sum(diff)) / len(diff)
+  if mean_diff > 20:
+    return False
+  else: 
+    return True
 
 def lookup (points):
   strokes = moosegesture.getGesture(points)
