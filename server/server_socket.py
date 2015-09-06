@@ -57,10 +57,10 @@ if __name__ == "__main__":
                         broadcast_data(sock, data) 
 
                         # store url
-                        if data[0]= "*":
+                        if data[0]== "*":
                             url = data[1:]
 
-                        if data[0]= "&":
+                        if data[0]== "&":
                             try:
                                 sock.send(url)
                             except:
