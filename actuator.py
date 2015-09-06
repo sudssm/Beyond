@@ -20,7 +20,7 @@ def get_foreground_app():
 
 
 def do_action(action):
-    keys = action.split(' ')
+    keys = action.lower().split('-')
     pyautogui.hotkey(*keys)
 
 

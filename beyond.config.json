@@ -1,6 +1,6 @@
 {
 	"DEFAULT" : {
-		"asdf" : "command q"
+		"asdf" : "command-q"
 	},
 	"iTerm" : {
 		"asdf" : "q"
