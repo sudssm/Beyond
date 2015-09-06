@@ -15,13 +15,10 @@ while(true) {
     
     if (avg < 65000) {
         if (!irOn) {
-            server.log("ON")
+            agent.send("update", "update");
         }
         irOn = true
     } else {
-        if (irOn) {
-            server.log("OFF")
-        }
         irOn = false
     }
 }
