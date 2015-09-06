@@ -5,41 +5,57 @@
         "upleft": "volumeup",
         "down": "volumedown",
         "downright": "volumedown",
-        "downleft": "volumedown"
+        "downleft": "volumedown",
+        "right": "media_nexttrack",
+        "left": "media_prevtrack", 
+        "updown": "media_playpause",
+        "triangle": "volumemute"
     },
     "Google Chrome": {
         "down": "up",
         "up": "down",
-        "right": "Command-[",
-        "left": "Command-]",
-        "upleft": "Command-T",
-        "upright": "Command-N",
-        "downright": "Shift-Command-N",
-        "downleft": "Command-W"
+        "right": "Command_[",
+        "left": "Command_]",
+        "upleft": "Command_T",
+        "upright": "Command_N",
+        "downright": "Shift_Command_T",
+        "downleft": "Command_W",
+        "square": "Command_+",
+        "triangle": "Command_-"
     },
     "Firefox": {
         "down": "up",
         "up": "down",
-        "right": "Command-[",
-        "left": "Command-]",
-        "upleft": "Command-T",
-        "upright": "Command-N",
-        "downright": "Shift-Command-N",
-        "downleft": "Command-W"
+        "right": "Command_[",
+        "left": "Command_]",
+        "upleft": "Command_T",
+        "upright": "Command_N",
+        "downright": "Shift_Command_N",
+        "downleft": "Command_W"
     },
     "Photo Booth": {
-        "down": "Command-Enter",
-        "downleft": "Command-W"
+        "down": "Command_Enter",
+        "downleft": "Command_W"
     },
     "VLC": {
-        "up": "Command-Up",
-        "down": "Command-Down",
-        "right": "Command-left",
-        "left": "Command-right",
-        "upright": "Command-f",
+        "up": "Command_Up",
+        "down": "Command_Down",
+        "right": "Command_left",
+        "left": "Command_right",
+        "upright": "Command_f",
         "downleft": "Esc",
-        "square": "Command-.",
-        "triangle": "Command-p"
+        "square": "Command_.",
+        "triangle": "Command_p"
+    },
+    "Spotify": {
+        "down": " ",
+        "right": "media_nexttrack",
+        "left": "media_prevtrack",
+        "up": "volumeup",
+        "upright": "volumeup",
+        "upleft": "volumeup",
+        "down": "volumedown",
+        "downright": "volumedown",
+        "downleft": "volumedown"
     }
 }
-
