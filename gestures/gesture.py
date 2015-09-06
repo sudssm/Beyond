@@ -9,9 +9,6 @@ gestureMap = {
   ('UL',): "upleft",
   ('DR',): "downright",
   ('DL',): "downleft",
-  ('DR', 'L', 'UR',): "tr_cw_top",
-  ('UR', 'DR', 'L',): "tr_cw_bl",
-  ('L', 'UR','DR',): "tr_cw_br",
 }
 
 def add_rotations(pattern, name, reverse=False):
@@ -61,10 +58,17 @@ def lookup (points):
 
   if gestures == None:
     return None
-  for gesture in gestures:
-    print "potential", gestureMap[gesture]
+
+  gestures = [gestureMap[gesture] for x in gestures]
+
+  for g in gestures:
+    print "potential", g
   
-  return gestureMap[gesture]
+  for shape in ["square", "triangle", "UR", "UL", "DL", "DR"]:
+    if shape in gestures:
+      return shape
+
+  return gestures[0]
 '''
 print lookup (importPoints("in/star.in"))
 
