@@ -81,7 +81,7 @@ from sys import maxsize
 
 # This is the minimum distance the mouse must travel (in pixels) before a
 # segment will be considered for stroke interpretation.
-_MIN_STROKE_LEN = 60
+#_MIN_STROKE_LEN = 60
 
 DOWNLEFT = 'DL'
 DOWN = 'D'
