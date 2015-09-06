@@ -10,35 +10,35 @@
     "Google Chrome": {
         "down": "up", 
         "up": "down", 
-        "right": "Command-[", 
-        "left": "Command-]", 
-        "upleft": "Command-T",
-        "upright": "Command-N",
-        "downright": "Shift-Command-N",
-        "downleft": "Command-W"
+        "right": "command-[", 
+        "left": "command-]", 
+        "upleft": "command-t",
+        "upright": "command-n",
+        "downright": "shift-command-n",
+        "downleft": "command-w"
     }, 
     "Firefox": {
         "down": "up", 
         "up": "down", 
-        "right": "Command-[", 
-        "left": "Command-]", 
-        "upleft": "Command-T",
-        "upright": "Command-N",
-        "downright": "Shift-Command-N",
-        "downleft": "Command-W"
+        "right": "command-[", 
+        "left": "command-]", 
+        "upleft": "command-t",
+        "upright": "command-n",
+        "downright": "shift-command-n",
+        "downleft": "command-w"
     }, 
     "Photo Booth": {
-        "down": "Command-Enter", 
-        "downleft": "Command-W", 
+        "down": "command-enter", 
+        "downleft": "command-w", 
         "VLC": { 
-            "up": "Command-Up",
-            "down": "Command-Down",
-            "right": "Command-left",
-            "left": "Command-right",
-            "upright": "Command-f",
-            "downleft": "Esc",
-            "square": "Command-.", 
-            "triangle": "Command-p"
+            "up": "command-up",
+            "down": "command-down",
+            "right": "command-left",
+            "left": "command-right",
+            "upright": "command-f",
+            "downleft": "esc",
+            "square": "command-.", 
+            "triangle": "command-p"
         } 
     }
 }
