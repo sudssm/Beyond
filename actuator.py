@@ -27,9 +27,9 @@ def do_action(action):
 
 def on_gesture_made(gesture):
     print gesture + "*"
-    if gesture == "up":
+    if "up" in gesture:
         set_volume(get_volume() + 5)
-    elif gesture == "down":
+    elif "down" in gesture:
         set_volume(get_volume() - 5)
     
     # First reload the config file
