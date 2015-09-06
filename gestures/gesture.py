@@ -9,7 +9,7 @@ gestureMap = {
   ('UL',): "upleft",
   ('DR',): "downright",
   ('DL',): "downleft",
-  ('U','D',): "updown,"
+  ('U','D',): "updown",
   ('L','R',): "leftright,"
 }
 
@@ -61,33 +61,14 @@ def lookup (points):
   if gestures == None:
     return None
 
-  gestures = [gestureMap[gesture] for x in gestures]
+  gestures = [gestureMap[x] for x in gestures]
 
   for g in gestures:
     print "potential", g
   
-  for shape in ["square", "triangle", "UR", "UL", "DL", "DR"]:
+  for shape in ["updown", "triangle", "square", "leftright", "upright", \
+                "upleft", "downleft", "downright"]:
     if shape in gestures:
       return shape
 
   return gestures[0]
-'''
-print lookup (importPoints("in/star.in"))
-
-print lookup (importPoints("in/square.in"))
-print ""
-print lookup (importPoints("in/square2.in"))
-print ""
-print lookup (importPoints("in/square3.in"))
-print ""
-print lookup (importPoints("in/square4.in"))
-print ""
-print lookup (importPoints("in/triangle.in"))
-print ""
-
-print lookup(importPoints("in/superman.in"))
-print lookup(importPoints("in/superman2.in"))
-
-print lookup(importPoints("in/right.in"))
-print lookup(importPoints("in/down.in"))
-'''
