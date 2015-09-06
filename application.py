@@ -4,19 +4,8 @@ from gestures import gesture
 import cv2.cv as cv
 import Queue
 
-from subprocess import check_output
+from subprocess import Popen 
 import re
-
-# from volume import Volume
-def get_volume():
-    regex = 'output volume:([0-9]*)'
-    a = check_output(["osascript", "-e", "get volume settings"])
-    vol = re.search(regex, a).group(1)
-    print vol 
-    return int(vol) 
-
-def set_volume(volume):
-    a = check_output(["osascript", "-e", "set volume output volume %i" % volume])
 
 def gestureRecognize():
     cap = cv2.VideoCapture(0)
@@ -29,12 +18,12 @@ def gestureRecognize():
             # flush the gesture
             g = gesture.lookup(gesture_cache)
             print g 
-            if g == "up":
-                set_volume(get_volume() + 5)
-            elif g == "down":
-                set_volume(get_volume() - 5)
+
+            Popen(["python","actuator.py",g])
 
             gesture_cache = []
+
+
         # Take each frame
         _, frame = cap.read()
         # frame = cv2.imread('led.jpg')
