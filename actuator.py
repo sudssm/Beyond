@@ -45,12 +45,13 @@ def handle_media_keys(action):
     if action == "media_prevtrack":
         HIDPostAuxKey(NX_KEYTYPE_REWIND)
 
-# def handle_brightness(action):
-    
-
-
-    
-
+def handle_screen(action):
+    regex = r'brightness ([0-9.]*)'
+    a = check_output(["brightness", "-l"])
+    brightness = float(re.search(regex, a).group(1))
+    b = 1 if brightness == 0 else 0
+    if action == "screen_toggle":
+        Popen(["brightness", str(b)])
 
 def set_volume(volume):
     a = check_output(["osascript", "-e", "set volume output volume %i" % volume])
@@ -60,6 +61,8 @@ def do_action(action):
     print action 
     if "media" in action or "volume" in action: 
         handle_media_keys(action)
+    if "screen" in action:
+        handle_screen(action)
     keys = action.lower().split('_')
     pyautogui.hotkey(*keys)
 
