@@ -4,8 +4,10 @@ from gestures import gesture
 import cv2.cv as cv
 import Queue
 
-from subprocess import Popen 
 import re
+import actuator
+import threading
+
 
 def gestureRecognize():
     cap = cv2.VideoCapture(0)
@@ -19,7 +21,9 @@ def gestureRecognize():
             g = gesture.lookup(gesture_cache)
             print g 
             if g != None:
-                Popen(["python","actuator.py",g])
+                thread = threading.Thread(target=actuator.on_gesture_made, args=(g))
+                thread.daemon = True                            # Daemonize thread
+                thread.start()                                  # Start the execution
 
             gesture_cache = []
 
