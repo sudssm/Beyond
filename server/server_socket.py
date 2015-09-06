@@ -53,7 +53,7 @@ if __name__ == "__main__":
                     data = sock.recv(RECV_BUFFER)
                     if data:
                         print data
-                        broadcast_data(data)                
+                        broadcast_data(sock, data)                
                  
                 except:
                     sock.close()
