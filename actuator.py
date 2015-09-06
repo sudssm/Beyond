@@ -5,7 +5,7 @@ import re
 import pyautogui
 
 
-CONFIG_FILENAME = "pennapps/apps/beyond.config.json"
+CONFIG_FILENAME = "beyond.config.json"
 DEFAULT_APPNAME = "DEFAULT"
 
 

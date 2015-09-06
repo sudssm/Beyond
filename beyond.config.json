@@ -1,8 +1,44 @@
 {
-	"DEFAULT" : {
-		"asdf" : "command-q"
-	},
-	"iTerm" : {
-		"asdf" : "q"
-	}
+    "DEFAULT": {
+        "up": "volumeup", 
+        "upright": "volumeup", 
+        "upleft": "volumeup", 
+        "down": "volumedown", 
+        "downright": "volumedown", 
+        "downleft": "volumedown"
+    },
+    "Google Chrome": {
+        "down": "up", 
+        "up": "down", 
+        "right": "Command-[", 
+        "left": "Command-]", 
+        "upleft": "Command-T",
+        "upright": "Command-N",
+        "downright": "Shift-Command-N",
+        "downleft": "Command-W"
+    }, 
+    "Firefox": {
+        "down": "up", 
+        "up": "down", 
+        "right": "Command-[", 
+        "left": "Command-]", 
+        "upleft": "Command-T",
+        "upright": "Command-N",
+        "downright": "Shift-Command-N",
+        "downleft": "Command-W"
+    }, 
+    "Photo Booth": {
+        "down": "Command-Enter", 
+        "downleft": "Command-W", 
+        "VLC": { 
+            "up": "Command-Up",
+            "down": "Command-Down",
+            "right": "Command-left",
+            "left": "Command-right",
+            "upright": "Command-f",
+            "downleft": "Esc",
+            "square": "Command-.", 
+            "triangle": "Command-p"
+        } 
+    }
 }
