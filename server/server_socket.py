@@ -1,14 +1,6 @@
 # Tcp Chat server
  
-import socket, select, base64, hashlib
-
-MAGIC = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11'
-HSHAKE_RESP = "HTTP/1.1 101 Switching Protocols\r\n" + \
-            "Upgrade: websocket\r\n" + \
-            "Connection: Upgrade\r\n" + \
-            "Sec-WebSocket-Accept: %s\r\n" + \
-            "\r\n"
-
+import socket, select
 
 #Function to broadcast chat messages to all connected clients
 def broadcast_data (sock, message):
@@ -16,8 +8,7 @@ def broadcast_data (sock, message):
     for socket in CONNECTION_LIST:
         if socket != server_socket and socket != sock :
             try :
-                msg = u"\x00received: %s\xff" % message.decode("utf-8", "ignore")
-                socket.send(msg)
+                socket.send(message)
             except :
                 # broken socket connection may be, chat client pressed ctrl+c for example
                 socket.close()
@@ -56,7 +47,7 @@ if __name__ == "__main__":
             #Some incoming message from a client
             else:
                 # Data recieved from client, process it
-                #try:
+                try:
                     #In Windows, sometimes when a TCP program closes abruptly,
                     # a "Connection reset by peer" exception will be thrown
                     data = sock.recv(RECV_BUFFER)
@@ -65,22 +56,9 @@ if __name__ == "__main__":
                         broadcast_data(sock, data)                
                  
 
-                        #might be html
-                        if "User-Agent:" in data:
-                            headers = {}
-                            lines = data.splitlines()
-                            for l in lines:
-                                parts = l.split(": ", 1)
-                                if len(parts) == 2:
-                                    headers[parts[0]] = parts[1]
-                            headers['code'] = lines[len(lines) - 1]
-                            key = headers['Sec-WebSocket-Key']
-                            resp_data = HSHAKE_RESP % ((base64.b64encode(hashlib.sha1(key+MAGIC).digest()),))
-                            sock.send(resp_data)
-
-                #except:
-                #    sock.close()
-                #    CONNECTION_LIST.remove(sock)
-                #    continue
+                except:
+                    sock.close()
+                    CONNECTION_LIST.remove(sock)
+                    continue
      
     server_socket.close()
