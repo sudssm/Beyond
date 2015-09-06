@@ -26,10 +26,6 @@ def do_action(action):
 
 def on_gesture_made(gesture):
     print gesture + "*"
-    if "up" in gesture:
-        set_volume(get_volume() + 5)
-    elif "down" in gesture:
-        set_volume(get_volume() - 5)
     
     # First reload the config file
     app_mappings = get_mappings()
@@ -48,15 +44,6 @@ def on_gesture_made(gesture):
 
     if gesture in action_mappings:
         do_action(action_mappings[gesture])
-
-def get_volume():
-    regex = 'output volume:([0-9]*)'
-    a = check_output(["osascript", "-e", "get volume settings"])
-    vol = re.search(regex, a).group(1)
-    return int(vol) 
-
-def set_volume(volume):
-    a = check_output(["osascript", "-e", "set volume output volume %i" % volume])
 
 
 if __name__ == '__main__':
