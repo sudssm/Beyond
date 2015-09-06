@@ -5,7 +5,7 @@ import re
 import pyautogui
 
 
-CONFIG_FILENAME = "beyond.config.json"
+CONFIG_FILENAME = "pennapps/apps/beyond.config.json"
 DEFAULT_APPNAME = "DEFAULT"
 
 
@@ -21,6 +21,7 @@ def get_foreground_app():
 
 
 def do_action(action):
+    print action
     keys = action.lower().split('-')
     pyautogui.hotkey(*keys)
 
@@ -32,7 +33,9 @@ def on_gesture_made(gesture):
 
     # Then get the foreground application
     foreground_app = get_foreground_app()
+    print app_mappings
 
+    print foreground_app
     # Finally, do the action
     if foreground_app in app_mappings:
         action_mappings = app_mappings[foreground_app]

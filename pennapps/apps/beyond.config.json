@@ -1,39 +1,44 @@
 {
-	"DEFAULT": {
-		"up": "volumeup",// vol
-		"upright": "volumeup",// vol
-		"upleft": "volumeup",// vol
-		"down": "volumedown", // vol
-		"downright": "volumedown", // vol
-		"downleft": "volumedown", // vol
-	"Google Chrome": {
-		"down": "up", // scrolling
-		"up": "down", // scrolling
-		"right": "Command-[", // go back
-		"left": "Command-]", // go forward
-		"upleft": "Command-T",
-		"upright": "Command-N",
-		"downright": "Shift-Command-N",
-		"downleft": "Command-W"}, // close tab
-	"Firefox": { 
-		"down": "up", // scrolling
-		"up": "down", // scrolling
-		"right": "Command-[", // go back
-		"left": "Command-]", // go forward
-		"upleft": "Command-T",
-		"upright": "Command-N",
-		"downright": "Shift-Command-N",
-		"downleft": "Command-W"}, // close tab
-	"Photo Booth": {
-		"down": "Command-Enter", // take photo 
-		"downleft": "Command-W", // quit app
-	"VLC": { // Must be playing a video
-		"up": "Command-Up", 
-		"down": "Command-Down", 
-		"right": "Command-left",
-		"left": "Command-right",
-		"upright": "Command-f", 
-		"downleft": "Esc",
-		"square": "Command-.", // quit the movie
-		"triangle": "Command-p"} // toggle play and pause,
+    "DEFAULT": {
+        "up": "volumeup", 
+        "upright": "volumeup", 
+        "upleft": "volumeup", 
+        "down": "volumedown", 
+        "downright": "volumedown", 
+        "downleft": "volumedown"
+    },
+    "Google Chrome": {
+        "down": "up", 
+        "up": "down", 
+        "right": "Command-[", 
+        "left": "Command-]", 
+        "upleft": "Command-T",
+        "upright": "Command-N",
+        "downright": "Shift-Command-N",
+        "downleft": "Command-W"
+    }, 
+    "Firefox": {
+        "down": "up", 
+        "up": "down", 
+        "right": "Command-[", 
+        "left": "Command-]", 
+        "upleft": "Command-T",
+        "upright": "Command-N",
+        "downright": "Shift-Command-N",
+        "downleft": "Command-W"
+    }, 
+    "Photo Booth": {
+        "down": "Command-Enter", 
+        "downleft": "Command-W", 
+        "VLC": { 
+            "up": "Command-Up",
+            "down": "Command-Down",
+            "right": "Command-left",
+            "left": "Command-right",
+            "upright": "Command-f",
+            "downleft": "Esc",
+            "square": "Command-.", 
+            "triangle": "Command-p"
+        } 
+    }
 }
