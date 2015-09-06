@@ -44,7 +44,7 @@ def lookup (points):
     return None
   for gesture in gestures:
     return gestureMap[gesture]
-
+'''
 print lookup (importPoints("in/star.in"))
 
 print lookup (importPoints("in/square.in"))
@@ -63,4 +63,4 @@ print lookup(importPoints("in/superman2.in"))
 
 print lookup(importPoints("in/right.in"))
 print lookup(importPoints("in/down.in"))
-
+'''
