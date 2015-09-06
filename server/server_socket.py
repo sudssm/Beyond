@@ -16,7 +16,12 @@ def broadcast_data (sock, message):
     for socket in CONNECTION_LIST:
         if socket != server_socket and socket != sock :
             try :
-                socket.send(message)
+                resp = bytearray([0b10000001, len(data)])
+                        # append the data bytes
+                        for d in bytearray(data):
+                            resp.append(d)
+
+                socket.send(resp)
             except :
                 # broken socket connection may be, chat client pressed ctrl+c for example
                 socket.close()
