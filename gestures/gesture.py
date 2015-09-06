@@ -9,6 +9,8 @@ gestureMap = {
   ('UL',): "upleft",
   ('DR',): "downright",
   ('DL',): "downleft",
+  ('U','D',): "updown,"
+  ('L','R',): "leftright,"
 }
 
 def add_rotations(pattern, name, reverse=False):
