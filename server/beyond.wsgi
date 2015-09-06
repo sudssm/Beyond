@@ -1,4 +1,4 @@
 import sys
-sys.path.insert(0, '/var/www/beyond')
+sys.path.insert(0, '/var/www/Beyond/server')
 
-from app import app as application
+from beyond import app as application
