@@ -69,7 +69,10 @@ if __name__ == "__main__":
 
                 except:
                     sock.close()
-                    CONNECTION_LIST.remove(sock)
+                    try:
+                        CONNECTION_LIST.remove(sock)
+                    except:
+                        pass
                     continue
      
     server_socket.close()
