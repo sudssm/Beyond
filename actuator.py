@@ -1,6 +1,7 @@
 import argparse
 import json
-from subprocess import Popen, PIPE
+from subprocess import Popen, PIPE, check_output
+import re
 import pyautogui
 
 
@@ -25,11 +26,11 @@ def do_action(action):
 
 
 def on_gesture_made(gesture):
-    print gesture
-    # if g == "up":
-    #     set_volume(get_volume() + 5)
-    # elif g == "down":
-    #     set_volume(get_volume() - 5)
+    print gesture + "*"
+    if gesture == "up":
+        set_volume(get_volume() + 5)
+    elif gesture == "down":
+        set_volume(get_volume() - 5)
     
     # First reload the config file
     app_mappings = get_mappings()

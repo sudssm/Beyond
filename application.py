@@ -18,8 +18,8 @@ def gestureRecognize():
             # flush the gesture
             g = gesture.lookup(gesture_cache)
             print g 
-
-            Popen(["python","actuator.py",g])
+            if g != None:
+                Popen(["python","actuator.py",g])
 
             gesture_cache = []
 
