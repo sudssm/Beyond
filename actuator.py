@@ -15,6 +15,9 @@ NX_KEYTYPE_MUTE = 7
 NX_KEYTYPE_FAST = 19
 NX_KEYTYPE_REWIND = 20
 
+SCREEN_WIDTH = 1300
+SCREEN_HEIGHT = 800
+
 
 CONFIG_FILENAME = "beyond.config.json"
 DEFAULT_APPNAME = "DEFAULT"
@@ -83,6 +86,8 @@ def on_gesture_made(gesture):
 
     if gesture in action_mappings:
         do_action(action_mappings[gesture])
+    elif gesture in app_mappings[DEFAULT_APPNAME]: 
+        do_action(app_mappings[DEFAULT_APPNAME][gesture])
 
 
 if __name__ == '__main__':

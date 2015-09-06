@@ -38,18 +38,23 @@ add_rotations(('UL', 'U', 'DR',), "triangle", True)
 
 moosegesture._MIN_STROKE_LEN = 80
 
-def importPoints (filename):
-  print "importing", filename
-  ham = 5
-  points = []
-  with open(filename,'r') as f:
-    points = [[int(p) for p in l.rstrip().split(" ")] for l in f.readlines()]
-  return points
-
+def identify_hold(points):
+  if len(points) < 3: 
+    return False 
+  for i in range(len(points) -1):
+    d = moosegesture._distance(points[i], points[i+1])
+    if d > 30:
+      return False       
+  return True 
 
 def lookup (points):
   strokes = moosegesture.getGesture(points)
   if len(strokes) == 0:
+    if identify_hold(points):
+      if len(points) > 10:
+        return "long_hold"
+      else: 
+        return "short_hold"
     return None
   possibles = gestureMap.keys()
   gestures = moosegesture.findClosestMatchingGesture(strokes, 

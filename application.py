@@ -7,9 +7,14 @@ import Queue
 import re
 import actuator
 import threading
+import pyautogui
 
+SCREEN_WIDTH = 1300
+SCREEN_HEIGHT = 800
 
+# Mode can be None or MOUSE
 def gestureRecognize():
+    global MODE
     cap = cv2.VideoCapture(0)
 
     gesture_cache = []
@@ -19,11 +24,19 @@ def gestureRecognize():
         if lag > 10 and len(gesture_cache) > 0:
             # flush the gesture
             g = gesture.lookup(gesture_cache)
-            print g 
+            if MODE != "MOUSE":
+                print g 
             if g != None:
-                thread = threading.Thread(target=actuator.on_gesture_made, args=(g,))
-                thread.daemon = True                            # Daemonize thread
-                thread.start()                                  # Start the execution
+                if g == "long_hold":
+                    MODE = "MOUSE" if MODE == None else None
+                    print "Mouse Mode: " + str(MODE)
+                if g == "short_hold" and MODE == "MOUSE":
+                    print "click"
+                    pyautogui.click()
+                if MODE != "MOUSE":
+                    thread = threading.Thread(target=actuator.on_gesture_made, args=(g,))
+                    thread.daemon = True                            # Daemonize thread
+                    thread.start()                                  # Start the execution
 
             gesture_cache = []
 
@@ -54,7 +67,6 @@ def gestureRecognize():
         # Bitwise-AND mask and original image
         res = cv2.bitwise_and(frame,frame, mask= mask)
 
-        centres = []
         contours, hierarchy = cv2.findContours(mask.copy(),cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
         maxcontour = (0, None)
         for idx, contour in enumerate(contours):
@@ -70,12 +82,16 @@ def gestureRecognize():
             continue 
             
         moments = cv2.moments(maxcontour[1])
-        centres.append((int(moments['m10']/moments['m00']), int(moments['m01']/moments['m00'])))
-        cv2.circle(mask, centres[-1], 3, (0, 255, 0), -1)
-        print centres[-1]
-        gesture_cache.append(centres[-1])
+        centre = (int(moments['m10']/moments['m00']), int(moments['m01']/moments['m00']))
+        cv2.circle(mask, centre, 3, (0, 255, 0), -1)
+        print centre
+        gesture_cache.append(centre)
         lag = 0
 
+        if MODE == "MOUSE":
+            width = cap.get(3)
+            height = cap.get(4)
+            pyautogui.moveTo(float(centre[0]) / width * SCREEN_WIDTH, float(centre[1])/ height * SCREEN_HEIGHT)
         
         k = cv2.waitKey(5) & 0xFF
         if k == 27:
@@ -83,10 +99,9 @@ def gestureRecognize():
 
     cv2.destroyAllWindows()
 def main():
-    # v = Volume()
-    # v.start()
     gestureRecognize()
 
 
 if __name__ == '__main__':
+    MODE = None
     main()
