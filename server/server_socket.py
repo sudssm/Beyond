@@ -16,9 +16,9 @@ def broadcast_data (sock, message):
     for socket in CONNECTION_LIST:
         if socket != server_socket and socket != sock :
             try :
-                resp = bytearray([0b10000001, len(data)])
+                resp = bytearray([0b10000001, len(message)])
                         # append the data bytes
-                        for d in bytearray(data):
+                        for d in bytearray(message):
                             resp.append(d)
 
                 socket.send(resp)
