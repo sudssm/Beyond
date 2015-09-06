@@ -32,6 +32,6 @@ if __name__ == "__main__":
                     sys.exit()
                 else :
                     #print data
-                    sys.stdout.write(data)
-             
+                    sys.stdout.write(data + "\n")
+                    sys.stdout.flush()
                 
