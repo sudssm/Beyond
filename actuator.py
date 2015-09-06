@@ -24,8 +24,8 @@ def do_action(action):
     keys = action.lower().split('-')
     pyautogui.hotkey(*keys)
 
-
 def on_gesture_made(gesture):
+    print gesture + "*"
     if "up" in gesture:
         set_volume(get_volume() + 5)
     elif "down" in gesture:
