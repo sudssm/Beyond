@@ -21,7 +21,7 @@ def gestureRecognize():
             g = gesture.lookup(gesture_cache)
             print g 
             if g != None:
-                thread = threading.Thread(target=actuator.on_gesture_made, args=(g))
+                thread = threading.Thread(target=actuator.on_gesture_made, args=(g,))
                 thread.daemon = True                            # Daemonize thread
                 thread.start()                                  # Start the execution
 
