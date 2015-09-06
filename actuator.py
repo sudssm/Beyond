@@ -19,9 +19,28 @@ def get_foreground_app():
     foregroundAppInfo = Popen(["lsappinfo", "info", "-only", "name", foregroundAppCode], stdout=PIPE).stdout.read()
     return foregroundAppInfo[foregroundAppInfo.index('=') + 2:-2]
 
+def handle_volume(action): 
+    #get current volume
+    regex = 'output volume:([0-9]*)'
+    a = check_output(["osascript", "-e", "get volume settings"])
+    vol = int(re.search(regex, a).group(1))
+    print type(vol)
+
+    if "up" in action:
+        check_output(["osascript", "-e", "set volume output volume %i" % (vol + 5)])
+    elif "down" in action: 
+        check_output(["osascript", "-e", "set volume output volume %i" % (vol - 5)])
+
+
+
+def set_volume(volume):
+    a = check_output(["osascript", "-e", "set volume output volume %i" % volume])
+
 
 def do_action(action):
-    print action
+    print action 
+    if "volume" in action: 
+        handle_volume(action)
     keys = action.lower().split('-')
     pyautogui.hotkey(*keys)
 
