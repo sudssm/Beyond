@@ -29,6 +29,14 @@ def log(message):
     s.send(message)
     print message
 
+def getUrl():
+    s.send("&")
+    url = s.recv(4096)
+    print url
+
+def setUrl(url):
+    s.send("*" + url)
+
 # Mode can be None or MOUSE
 def gestureRecognize():
     global MODE

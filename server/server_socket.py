@@ -15,6 +15,7 @@ def broadcast_data (sock, message):
                 CONNECTION_LIST.remove(socket)
  
 if __name__ == "__main__":
+    url = ""
      
     # List to keep track of socket descriptors
     CONNECTION_LIST = []
@@ -53,7 +54,17 @@ if __name__ == "__main__":
                     data = sock.recv(RECV_BUFFER)
                     if data:
                         print data
-                        broadcast_data(sock, data)                
+                        broadcast_data(sock, data) 
+
+                        # store url
+                        if data[0]= "*":
+                            url = data[1:]
+
+                        if data[0]= "&":
+                            try:
+                                sock.send(url)
+                            except:
+                                pass             
                  
 
                 except:
