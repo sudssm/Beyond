@@ -1,117 +1,18 @@
-/* Pin writing */
-
-local pin1 = hardware.pin1
-
-pin1.configure(DIGITAL_OUT)
-
-local i = 0
-local slowCount = 0
-// only have one of these true at a time
-local steady = false
-local slow = false
-local remote = false
-
-server.log("code running")
-
-// steady
-if (steady) {
-    pin1.write(1)
-    imp.wakeup(10, function() {
-        pin1.write(0)
-    })
-}
-
-server.log("past steady")
-
-function slowLoop() {
-    slowCount++
-    imp.wakeup(1, function() {
-            pin1.write(1)
-            imp.wakeup(1, function() {
-                pin1.write(0)
-                if (slowCount < 10) {
-                    slowLoop()
-                }
-            })
-        })
-}
-
-// blink at slow freq
-if (slow) {
-    slowLoop()
-}
-
-server.log("past slow")
-
-// Phillips RC-5 infrared remote protocol
-// Each bit takes a total of 1.778 microseconds.
-// There will be 14 total bits per message
-local interval = 0.000889 //0.000889
-function transmitZero() {
-    pin1.write(1)
-    imp.sleep(interval)
-    pin1.write(0)
-}
-
-function transmitOne() {
-    pin1.write(0)
-    imp.sleep(interval)
-    pin1.write(1)
-}
-
-server.log("pre remote")
-if (remote) {
-    local stream = [0, 0, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0] // length 14
-    for (i = 0; i < 14; i++) {
-        server.log("post for")
-        if (stream[i] == 0) {
-            transmitZero()
-            imp.sleep(interval)
-            server.log("transmit zero")
-        } else {
-            transmitOne()
-            imp.sleep(interval)
-            server.log("transmit one")
-        }
-    }
-}
-server.log("post remote")
-
-/* Sensor reading */
+/* IR sensor */
 
 local pin9 = hardware.pin9
+pin9.configure(ANALOG_IN)
 
 local irOn = false
-
 local size = 10000
-
-pin9.configure(ANALOG_IN)
 
 while(true) {
     local avg = 0
-    // local counts = {}
-    // counts[0] <- 0
-    // counts[100] <- 0
-    // counts[500] <- 0
-    // counts[10000] <- 0
-    // counts[50000] <- 0
-    // counts[60000] <- 0
-
     for (local j = 0; j < size; j++) {
-        local r9 = pin9.read()
-        avg += r9
-        // foreach (key, value in counts) {
-        //     if (r9 > key) {
-        //         counts[key] = value + 1
-        //     }
-        // }
+        avg += pin9.read()
     }
-    // local output = ""
-    // foreach (key, value in counts) {
-    //     output += key + " : " + counts[key] + " | "
-    // }
-    // server.log(output)
     avg = 1.0 * avg / size
+    
     if (avg < 65000) {
         if (!irOn) {
             server.log("ON")
