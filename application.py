@@ -61,9 +61,9 @@ def gestureRecognize():
             area = cv2.contourArea(contour) 
             if area > maxcontour[0]:
                 maxcontour = (area, contour)
-        cv2.imshow('frame',frame)
-        cv2.imshow('mask',mask)
-        cv2.imshow('res', res)
+        # cv2.imshow('frame',frame)
+        # cv2.imshow('mask',mask)
+        # cv2.imshow('res', res)
 
 
         if maxcontour[1] == None or maxcontour[0] < 30:

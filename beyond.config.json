@@ -29,7 +29,7 @@
     },
     "Photo Booth": {
         "down": "Command-Enter",
-        "downleft": "Command-W",
+        "downleft": "Command-W"
     },
     "VLC": {
         "up": "Command-Up",
@@ -42,4 +42,4 @@
         "triangle": "Command-p"
     }
 }
-}
+
