@@ -24,9 +24,7 @@
         "downright": "Shift_Command_T",
         "downleft": "Command_W",
         "square": "Command_+",
-        "triangle": "Command_-",
-        "leftright": "urlstore",
-        "updown": "urlfetch"
+        "triangle": "Command_-"
     },
     "Firefox": {
         "down": "up",

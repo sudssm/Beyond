@@ -76,13 +76,14 @@ def gestureRecognize():
         # Convert BGR to HSV
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
         # pink = np.uint8([[[186, 109, 199]]])
-        pink = np.uint8([[[221, 136, 200 ]]])
+        pink = np.uint8([[[138, 89, 166 ]]])
+# 166   89  138 
 
         # define range of pink color in HSV
         hsv_pink = cv2.cvtColor(pink, cv2.COLOR_BGR2HSV)[0][0]
 
         lower = np.array([hsv_pink[0]-20, 100, 100])
-        upper = np.array([hsv_pink[0] + 20, 255, 255])
+        upper = np.array([hsv_pink[0] + 30, 255, 255])
         
         #define range of white when looking inside? (not currently used)
         lw = np.array([0,0,0], dtype=np.uint8)
@@ -100,12 +101,12 @@ def gestureRecognize():
             area = cv2.contourArea(contour) 
             if area > maxcontour[0]:
                 maxcontour = (area, contour)
-        cv2.imshow('frame',frame)
+        # cv2.imshow('frame',frame)
         # cv2.imshow('mask',mask)
         cv2.imshow('res', res)
 
 
-        if maxcontour[1] == None or maxcontour[0] < 30:
+        if maxcontour[1] == None or maxcontour[0] < 15:
             continue 
             
         moments = cv2.moments(maxcontour[1])
